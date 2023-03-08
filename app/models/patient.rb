@@ -1,5 +1,6 @@
 class Patient < ApplicationRecord
-  belongs_to :medical_history
+  has_many :medical_histories
+  has_many :appointment
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :address, presence:true, length: { maximum: 100 }

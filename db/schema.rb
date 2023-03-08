@@ -16,8 +16,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_03_033002) do
 
   create_table "appointments", force: :cascade do |t|
     t.date "appointment_date"
-    t.datetime "start", precision: nil
-    t.datetime "end", precision: nil
     t.integer "schedule_id"
     t.integer "doctor_id"
     t.integer "patient_id"
@@ -27,16 +25,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_03_033002) do
 
   create_table "departments", force: :cascade do |t|
     t.string "name"
-    t.integer "doctor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "doctors", force: :cascade do |t|
     t.string "name"
+    t.string "email"
     t.string "specialization"
     t.string "contact"
     t.integer "department_id"
+    t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -57,13 +56,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_03_033002) do
     t.date "dob"
     t.string "contact"
     t.integer "gender"
-    t.integer "medical_history_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "schedules", force: :cascade do |t|
-    t.date "day"
     t.datetime "start", precision: nil
     t.datetime "end", precision: nil
     t.integer "doctor_id"

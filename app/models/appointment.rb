@@ -1,18 +1,22 @@
 class Appointment < ApplicationRecord
-  belongs_to :doctor, dependent: :destroy
-  belongs_to :patient, dependent: :destroy
-  belongs_to :schedule, dependent: :destroy
-  has_many :medical_histories, dependent: :destroy
+  belongs_to :doctor
+  belongs_to :patient
+  belongs_to :schedule
+  has_one :medical_history
   
   validates :appointment_date, presence: true
-  validates :start, presence: true
-  validates :end, presence: true
+  # validates :start, presence: true
+  # validates :end, presence: true
   
   def new_attributes
     {
       id: self.id,
-      start: self.start,
-      end: self.end,
+      appointment_date: self.appointment_date,
+      doctor_id: self.doctor_id,
+      patient_id: self.patient_id,
+      schedule_id: self.schedule_id,
+      # start: self.start,
+      # end: self.end,
       created_at: self.created_at,
     }
   end
